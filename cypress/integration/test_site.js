@@ -7,10 +7,16 @@ describe("Navigate to my site!", () => {
       cy.viewport(size);
       //visit website
       cy.pause();
-      cy.visit("https://example.cypress.io");
+      cy.visit("");
 
       cy.pause();
-      cy.contains("type");
+      cy.contains("type")
+        .click();
+
+      //get an input and type into it (then verify)
+      cy.get('.action-email')
+        .type('fake@email.com')
+        .should('have.value', 'fake@email.com')
     });
   });
 });
