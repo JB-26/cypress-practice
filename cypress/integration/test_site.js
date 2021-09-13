@@ -8,11 +8,11 @@ describe("Navigate to my site!", () => {
       //set viewport
       cy.viewport(size);
       //visit website
-      cy.pause();
+      //cy.pause();
       cy.visit("");
 
       //click the link
-      cy.pause();
+      //cy.pause();
       cy.contains("type").click();
 
       //get an input and check if its empty
@@ -42,7 +42,7 @@ describe("Navigate to my site!", () => {
         .children('.active')
         .should('contain', 'Data');
       
-      cy.pause();
+      //cy.pause();
       //check the list
       cy.get('.traversal-list>li')
         .eq(1).should('contain', 'siamese');
@@ -76,6 +76,29 @@ describe("Navigate to my site!", () => {
         .find('[type="text"]')
         .clear()
         .should('be.empty')
+    });
+  });
+});
+
+//another test
+describe("Another test!", () => {
+  sizes.forEach((size) => {
+    it(`Go to the kitchen sink and visit the navigation section on ${size}`, () => {
+      cy.viewport(size);
+
+      cy.visit("");
+
+      cy.contains("reload")
+        .click();
+
+      //check the location of the pathname
+      cy.location('pathname').should('include', 'navigation');
+
+      //go back one page
+      cy.go('back');
+
+      //check the location of the pathname again
+      cy.location('pathname').should('not.include', 'navigation');
     });
   });
 });
