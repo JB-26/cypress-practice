@@ -99,6 +99,13 @@ describe("Another test!", () => {
 
       //check the location of the pathname again
       cy.location('pathname').should('not.include', 'navigation');
+
+      cy.contains('title')
+        .click();
+      
+      //check the title of the page
+      cy.title().should('include', 'Kitchen Sink')
+      cy.title().should('not.include', 'test')
     });
   });
 });
