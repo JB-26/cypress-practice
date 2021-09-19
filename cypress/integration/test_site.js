@@ -1,6 +1,11 @@
 //create array of viewports for test
 const sizes = ["iphone-xr", "ipad-2", "macbook-13"];
 
+//generate a random number between 1 and 10
+let randInt = Math.floor((Math.random() * 10) + 1);
+//print to console
+console.log(randInt);
+
 describe("Navigate to my site!", () => {
   sizes.forEach((size) => {
     //using string interpolation to display the name of device
@@ -106,6 +111,25 @@ describe("Another test!", () => {
       //check the title of the page
       cy.title().should('include', 'Kitchen Sink')
       cy.title().should('not.include', 'test')
+    });
+
+    it(`Go back to the kitchen sink and visit another section on ${size}`, () => {
+      cy.viewport(size);
+
+      cy.visit("");
+
+      //click the link
+      //cy.pause();
+      cy.contains("type").click();
+
+      //get an input and check if its empty
+      cy.get(".action-email").should("be.empty");
+
+      //get an input and type into it (then verify)
+      cy.get(".action-email")
+        //use the random integer
+        .type(`${randInt}`)
+        .should("have.value", `${randInt}`);
     });
   });
 });
